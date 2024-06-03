@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SearchRequest;
 use App\Http\Resources\IndexOrderResource;
 use App\Http\Services\OrderService;
 use Illuminate\Http\Request;
@@ -15,10 +16,9 @@ class OrderController extends Controller
         $this->orderService = $orderService;
     }
 
-    public function getOrders(Request $request)
+    public function getOrders(SearchRequest $request)
     {
-        $criteria = $request->only(['status', 'customer', 'amount']);
-        $orders = $this->orderService->getOrders($criteria);
+        $orders = $this->orderService->getOrders($request->validated());
         return ResponseOK(IndexOrderResource::collection($orders));
     }
 }

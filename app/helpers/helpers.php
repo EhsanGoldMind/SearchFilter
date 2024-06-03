@@ -45,3 +45,14 @@ function ResponseOK($response = null, $message = 'درخواست شما با م�
         'message' => $message,
     ]);
 }
+function failValidate($validator): JsonResponse
+{
+    return response()->json(
+        [
+            'success' => false,
+            'data' => null,
+            'errors' => $validator->errors(),
+            'message' => $validator->errors()->first()
+        ], Response::HTTP_UNPROCESSABLE_ENTITY
+    );
+}

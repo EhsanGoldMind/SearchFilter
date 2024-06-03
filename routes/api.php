@@ -17,6 +17,6 @@ use \App\Http\Controllers\OrderController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::prefix('backoffice')->name('order.')->group(function () {
-        Route::get('/orders', [OrderController::class, 'getOrders'])->name('getOrders');
+Route::prefix('backoffice')->name('orders.')->group(function () {
+        Route::get('/orders', [OrderController::class, 'getOrders'])->name('get');
 });
